@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<title>Sky Hotel Christmas card</title>
+<link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon">
+<script type="text/javascript">
+	function init(){
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      var w = canvas.width;
+      var h = canvas.height;
+
+      var bg = new Image();
+      bg.src = "images/skyhotel-(3).png";
+
+      var flakes = [];
+
+      function snowfall(){
+         ctx.clearRect(0, 0, w, h);
+         ctx.drawImage(bg, 0, 0);
+         addFlake();
+         snow();
+      };
+
+      function addFlake(){
+         var x = Math.ceil(Math.random() * w);
+         var s = Math.ceil(Math.random() * 4);
+         flakes.push({"x": x, "y": 0, "s": s});
+      };
+
+      function snow(){
+         for (var i = 0; i < flakes.length; i++) {
+            var flake = flakes[i];
+            ctx.beginPath();
+            ctx.fillStyle ="rgba(255, 255,255,0.7)"; 
+            ctx.arc(flake.x, flakes[i].y+=flake.s/2, flake.s/2, 0, 2 * Math.PI);
+            ctx.fill();
+            if (flakes[i].y > h) {
+               flakes.splice(i,1);
+            }
+         };
+      };
+      setInterval(snowfall, 20);
+
+      
+	var myImage = document.getElementById("look");
+	var imageArray =["images/skyimage.jpg","images/resturant.jpg","images/gardens.jpg","images/balcon.jpg","images/bed.jpg","images/reception.jpg","images/conference.jpg","images/delux.jpg","images/main.jpg"];
+	var imageIndex = 0;
+
+	function changeImage() {
+	myImage.setAttribute("src",imageArray[imageIndex]);
+	imageIndex++ ;
+	if(imageIndex >= imageArray.length) {
+	imageIndex = 0;
+	}//end of if braces
+	}
+	//setting the interval
+	setInterval(changeImage,4000); 
+
+	
+   };
+    window.onload = init;
+</script>
+<style type="text/css">
+	body{
+      background-color: #ccc;
+   }
+</style>
+   <body>
+   <canvas id="canvas" width="750" height="595"></canvas>
+   <!--<img  src="skyhotel-(2).png" width = "750"; height="595" alt="">-->
+   <img id="look" src="images/skyimage.jpg" width = "575" height="595" alt="">
+     <audio controls ="" autoplay hidden="yes">
+         <source src="OGG/we_wish_you_a_merry_christmas_with_lyrics_christmas_carol_song_kids_love_tog_aac_53839.ogg" type="audio/ogg" />
+         Your browser does not support the audio element.
+      </audio>
+   </body>
+</html>
